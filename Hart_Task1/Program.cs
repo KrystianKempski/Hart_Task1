@@ -6,9 +6,9 @@ internal class Program
     private static void Main(string[] args)
     {
 
-        int num1=0;
+        int selectedAction=0;
         decimal netto = 0, brutto = 0, tax = 0 ;
-        string? currency=string.Empty;
+        string? currency=string.Empty,temp = string.Empty;
 
         Console.WriteLine("############################################################");
         Console.WriteLine("###################### TAX CALCULATOR ######################");
@@ -23,9 +23,9 @@ internal class Program
                 Console.WriteLine("\t2 - Choose currency and VAT tax related to it");
                 Console.WriteLine("\t3 - Show tax value and brutto value\r");
                 Console.WriteLine("Type a number and press enter");
-                num1 = Convert.ToInt32(Console.ReadLine());
+                selectedAction = Convert.ToInt32(Console.ReadLine());
 
-                switch(num1)
+                switch(selectedAction)
                 {
                     case 1:
                         Console.WriteLine("Insert netto value:");
@@ -39,24 +39,25 @@ internal class Program
                             {
                                 Console.WriteLine($"\t{vat.Key} {vat.Value}%");
                             }
-                            currency = Console.ReadLine();
-                            if (currency == null)
+                            temp = Console.ReadLine();
+                            if (temp == null)
                             {
-                                currency = string.Empty;
+                                temp = string.Empty;
                                 Console.WriteLine("\r\nWrong currency selected. Try again or type EXIT to go to main menu");
                             }
-                            else if (currency.ToUpper() == "EXIT")
+                            else if (temp.ToUpper() == "EXIT")
                             {
-                                currency = string.Empty;
+                                Console.WriteLine("\r\nCurrency not changed");
                                 break;
                             }
-                            else if (!CurrencyVat.CurrencyVatList.ContainsKey(currency))
+                            else if (!CurrencyVat.CurrencyVatList.ContainsKey(temp))
                             {
-                                currency = string.Empty;
+                                temp = string.Empty;
                                 Console.WriteLine("\r\nWrong currency selected. Try again or type EXIT to go to main menu");
                             }
                             else
                             {
+                                currency = temp;
                                 Console.WriteLine($"Currency successfully chosen. Selected currency: {currency}");
                                 break;
                             }
