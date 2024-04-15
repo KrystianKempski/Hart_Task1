@@ -7,7 +7,7 @@ internal class Program
     {
 
         int selectedAction=0;
-        decimal netto = 0, brutto = 0, tax = 0 ;
+        decimal netto = 0.00m, brutto = 0.00m, tax = 0.00m ;
         string? currency=string.Empty,temp = string.Empty;
 
         Console.WriteLine("############################################################");
@@ -50,14 +50,14 @@ internal class Program
                                 Console.WriteLine("\r\nCurrency not changed");
                                 break;
                             }
-                            else if (!CurrencyVat.CurrencyVatList.ContainsKey(temp))
+                            else if (!CurrencyVat.CurrencyVatList.ContainsKey(temp.ToUpper()))
                             {
                                 temp = string.Empty;
                                 Console.WriteLine("\r\nWrong currency selected. Try again or type EXIT to go to main menu");
                             }
                             else
                             {
-                                currency = temp;
+                                currency = temp.ToUpper();
                                 Console.WriteLine($"Currency successfully chosen. Selected currency: {currency}");
                                 break;
                             }
@@ -78,7 +78,7 @@ internal class Program
                         }
                         else { 
                             TaxCalculator calculator = new(currency);
-                            tax =  calculator.Calculate(netto);
+                           tax =  calculator.Calculate(netto);
                             brutto = netto + tax;
                             Console.WriteLine("##################### RESULTS #####################");
                             Console.WriteLine($"\tNETTO: {netto}");

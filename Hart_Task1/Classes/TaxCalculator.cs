@@ -10,20 +10,20 @@ namespace Hart_Task1.Classes
 {
     public class TaxCalculator : ITaxCalculator
     {
-        private double _vatValue;
+        private decimal _vatValue;
         
         public TaxCalculator(string? currency) 
         {
-            _vatValue =  (double)CurrencyVat.CurrencyVatList[currency] * 0.01;
+            _vatValue =  CurrencyVat.CurrencyVatList[currency] * 0.01m;
         }
 
         public decimal Calculate(decimal amount)
         {
-            if(amount < 1 || _vatValue < 0.0) 
+            if(amount < 0.00m || _vatValue < 0.00m) 
             {
                 return 0;
             }
-            return (decimal)Math.Round((double)amount * _vatValue);
+            return Math.Round(amount * _vatValue,2);
         }
     }
 }
